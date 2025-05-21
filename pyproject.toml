@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "tkinter-yt-downloader"
+version = "0.1.0"
+description = ""
+authors = ["DinithKumudika <dinithwalpitagama@gmail.com>"]
+readme = "README.md"
+packages = [{ include = "yt_downloader" }]
+
+[tool.poetry.dependencies]
+python = ">=3.11"
+ffmpeg-python = ">=0.2.0,<0.3.0"
+customtkinter = ">=5.2.2,<6.0.0"
+yt-dlp = ">=2025.4.30,<2026.0.0"
+python-dotenv = "^1.1.0"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.11.10"
+
+[tool.poetry.scripts]
+yt-downloader = "yt_downloader.main:main"

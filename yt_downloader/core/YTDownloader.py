@@ -1,26 +1,42 @@
-from pytube import YouTube
-import requests
 from io import BytesIO
+import json
+
+from yt_dlp import YoutubeDL
+import requests
 from PIL import Image
 
 
 class YTDownloader:
      def __init__(self, video_url: str):
           self.video_url = video_url
-          self.video = YouTube(video_url)
+          self.video = None
           self.video_title = None
           self.video_description = None
           self.video_thumbnail = None
           self.video_duration = None
-          self.available_resolutions = []
+          self.video_info = None
 
-     def get_resolutions(self):
-          # Filter progressive (includes video + audio)
-          streams = self.video.streams.filter(progressive=True, file_extension='mp4')
-
-          # Get available resolutions
-          self.available_resolutions = sorted(set(stream.resolution for stream in streams if stream.resolution))
-          return self.available_resolutions
+     def get_info(self):
+          try:
+               ydl_opts = {
+                    "quiet": True,
+                    "skip_download": True,
+               }
+               resolutions = set()
+               with YoutubeDL(ydl_opts) as ydl:
+                    info = ydl.extract_info(self.video_url, download=False)
+                    print(json.dumps(ydl.sanitize_info(info), indent=4))
+                    formats = info.get("formats", [])
+                    for format in formats:
+                         height = format.get("height")
+                         if height:
+                              resolutions.add(f"{height}p")
+                              
+                    resolutions = sorted(resolutions, key=lambda r: int(r.replace("p", "")))
+                    
+          except Exception as e:
+               print("Failed to video info")
+               print("Error:", e)
      
      def get_thumbnail(self):
           try:

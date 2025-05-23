@@ -61,5 +61,8 @@ class App(ctk.CTk):
     def start(self, link: str):
         print(link)
         downloader = YTDownloader(link)
+        video_title = downloader.get_title()
         resolutions = downloader.get_resolutions()
-        print(resolutions)
+        print(video_title)
+        for item in resolutions:
+            print(item["resolution"])

@@ -54,7 +54,7 @@ class App(ctk.CTk):
             text="Download",
             width=180,
             height=45,
-            command=lambda: self.start(self.link_input.get()),
+            command= self.on_pressed_start,
             font=("Segoe UI", 14, "bold"),
             corner_radius=25,
             compound="right",

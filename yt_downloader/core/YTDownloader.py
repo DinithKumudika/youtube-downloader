@@ -1,5 +1,4 @@
 from io import BytesIO
-import json
 
 from yt_dlp import YoutubeDL
 import requests
@@ -25,7 +24,9 @@ class YTDownloader:
                resolutions = set()
                with YoutubeDL(ydl_opts) as ydl:
                     info = ydl.extract_info(self.video_url, download=False)
-                    print(json.dumps(ydl.sanitize_info(info), indent=4))
+                    title = info.get("title")
+                    print(title)
+               
                     formats = info.get("formats", [])
                     for format in formats:
                          height = format.get("height")

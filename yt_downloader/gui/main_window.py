@@ -27,6 +27,11 @@ class App(ctk.CTk):
             ),
             size=(20, 25),
         )
+        
+        # Create main container frame
+        self.main_frame = ctk.CTkFrame(self, fg_color="transparent")
+        self.main_frame.pack(expand=True, fill="both", padx=20, pady=20)
+        
         self.label_link = ctk.CTkLabel(
             self,
             image=emoji_img,
@@ -44,6 +49,7 @@ class App(ctk.CTk):
             width=350,
             height=40,
             placeholder_text="Insert link here...",
+            placeholder_text_color="gray",
             corner_radius=10,
             textvariable=url,
             font=("Segoe UI", 14)
@@ -53,16 +59,12 @@ class App(ctk.CTk):
         self.start_btn = ctk.CTkButton(
             self, 
             text="Start", 
-            command=lambda: self.start(self.link_input.get()),
+            command= self.on_pressed_start,
             font=("Segoe UI", 16)
         )
         self.start_btn.pack(pady=10)
 
-    def start(self, link: str):
-        print(link)
+    def on_pressed_start(self):
+        link = self.link_input.get()
         downloader = YTDownloader(link)
-        video_title = downloader.get_title()
-        resolutions = downloader.get_resolutions()
-        print(video_title)
-        for item in resolutions:
-            print(item["resolution"])
+        downloader.get_info()

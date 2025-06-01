@@ -25,44 +25,45 @@ class App(ctk.CTk):
         self.main_frame = ctk.CTkFrame(self, fg_color="transparent")
         self.main_frame.pack(expand=True, fill="both", padx=20, pady=20)
 
-        # URL input container
+        # URL input container with white background and shadow
         self.input_container = ctk.CTkFrame(
             self.main_frame,
-            fg_color="transparent",
+            fg_color="white",
             width=680,
-            height=100
+            height=60,
+            corner_radius=30,
+            border_width=1,
+            border_color="#E5E5E5"
         )
         self.input_container.pack(pady=20)
         self.input_container.pack_propagate(False)
 
-        # Link input
+        # Link input without border (since container has the border)
         self.link_input = ctk.CTkEntry(
             self.input_container,
-            width=480,
-            height=45,
+            width=460,
+            height=40,
             placeholder_text="Enter youtube url here...",
             font=("Segoe UI", 14),
             textvariable=url,
-            border_width=1,
-            corner_radius=25
+            border_width=0,
+            fg_color="transparent"
         )
-        self.link_input.pack(side="left", padx=(0, 10))
+        self.link_input.pack(side="left", padx=(20, 0))
 
-        # Download button with icon
+        # Download button
         self.start_btn = ctk.CTkButton(
             self.input_container,
             text="Download",
-            width=180,
-            height=45,
-            command= self.on_pressed_start,
+            width=160,
+            height=40,
+            command=self.on_pressed_start,
             font=("Segoe UI", 14, "bold"),
             corner_radius=25,
-            compound="right",
-            hover=True,
             fg_color="#7C63A6",
             hover_color="#6C5090"
         )
-        self.start_btn.pack(side="left")
+        self.start_btn.pack(side="right", padx=10)
 
     def on_pressed_start(self):
         link = self.link_input.get()

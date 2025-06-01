@@ -1,0 +1,12 @@
+class Colors:
+     PRIMARY = '#6366f1'
+     PRIMARY_HOVER = '#4f46e5'
+     SECONDARY = '#f8fafc'
+     BACKGROUND = '#0f172a'
+     SURFACE = '#1e293b'
+     TEXT_PRIMARY = '#f1f5f9'
+     TEXT_SECONDARY = '#94a3b8'
+     ACCENT = '#06b6d4'
+     SUCCESS = '#10b981'
+     ERROR = '#ef4444'
+     BORDER = '#334155'
